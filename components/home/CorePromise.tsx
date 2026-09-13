@@ -170,7 +170,7 @@ export function CorePromise() {
   return (
     <section
       id="explorers-trail"
-      className="explorers-trail relative overflow-x-clip bg-[#FDFBF9] pb-8 md:pb-12"
+      className="explorers-trail relative overflow-x-clip bg-[#FDFBF9] pb-6 md:pb-10"
     >
       <Reveal className="w-full">
         <div className="explorers-trail-banner relative left-1/2 w-screen max-w-none -translate-x-1/2 border-y border-[#EAE5DD]">
@@ -282,19 +282,19 @@ export function CorePromise() {
         </div>
       </Reveal>
 
-      <div className="shell mt-8 sm:mt-10">
+      <div className="shell mt-6 sm:mt-8">
         <Reveal>
-          <div className="mb-7 text-center sm:mb-8">
+          <div className="mb-5 text-center sm:mb-6">
             <p className="mx-auto w-fit">
               <SectionPill tone="make">What you make &amp; take home</SectionPill>
             </p>
-            <p className="mx-auto mt-3 max-w-lg text-ink-soft">
+            <p className="mx-auto mt-2 max-w-lg text-ink-soft">
               Real things from Auntie Jonn&apos;s workshops — soap, prints,
               magnets, and more you can hold.
             </p>
           </div>
 
-          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <ul className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-5">
             {creations.map((item, index) => (
               <li
                 key={item.id}

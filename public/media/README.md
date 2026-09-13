@@ -4,7 +4,8 @@ Replace any file here with a higher-resolution studio original — keep the file
 
 | File | Use |
 |------|-----|
-| `logo.png` | Header brand mark (from xplorers.life) |
+| `logo.png` | Header / footer brand mark (pink→blue gradient badge) |
+| `favicon-32.png` | Small raster favicon |
 | `hero-studio.jpg` | Hero gallery — studio / Sunday Social |
 | `hero-workshop.jpg` | Hero gallery — workshop participants |
 | `hero-creation.png` | Hero gallery — brand / take-home |

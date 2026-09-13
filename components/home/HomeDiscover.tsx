@@ -71,23 +71,15 @@ export function HomeDiscover({ upcoming }: { upcoming: UpcomingRow[] }) {
         <div className="shell">
           <Reveal className="max-w-2xl">
             <SectionPill tone="audience">Who is this for?</SectionPill>
-            <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              Uncover, Create &amp; Wonder —{" "}
-              <span className="relative inline-block">
-                <span className="font-hand text-magenta">Side by Side</span>
-                <HandSwoosh className="text-mustard" />
-              </span>
+            <h2 className="relative mt-3 inline-block font-hand text-3xl leading-none text-magenta sm:text-4xl">
+              Made for every kind of explorer
+              <HandSwoosh className="text-mustard" />
             </h2>
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
-              Step up to a table filled with real materials, guided experiments,
-              and endless curiosity. No lectures—just hands-on magic where big
-              ideas take shape together.
-            </p>
           </Reveal>
 
           <Reveal>
             <div
-              className="mt-8 flex flex-wrap gap-2"
+              className="mt-3 mb-6 flex flex-wrap gap-2"
               role="tablist"
               aria-label="Audience"
             >
@@ -165,7 +157,7 @@ export function HomeDiscover({ upcoming }: { upcoming: UpcomingRow[] }) {
           <Reveal className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <SectionPill tone="make">What you&apos;ll make today</SectionPill>
-              <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+              <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
                 Upcoming workshops
               </h2>
               <p className="mt-2 text-ink-soft">
@@ -179,7 +171,7 @@ export function HomeDiscover({ upcoming }: { upcoming: UpcomingRow[] }) {
 
           {rows.length === 0 ? (
             <Reveal>
-              <div className="torn-card mt-6 p-6 text-center sm:p-8">
+              <div className="torn-card mt-5 p-5 text-center sm:p-7">
                 <p className="font-display text-xl font-semibold text-ink">
                   No open sessions today
                 </p>

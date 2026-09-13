@@ -6,7 +6,7 @@ export function LocationSection() {
   return (
     <section
       id="find-the-studio"
-      className="relative overflow-hidden grain bg-[#FDFBF9] py-12"
+      className="relative overflow-hidden grain bg-[#FDFBF9] py-8 md:py-12"
     >
       <div className="shell">
         <Reveal className="mx-auto max-w-6xl">
@@ -15,7 +15,7 @@ export function LocationSection() {
             {studio.headline}
           </h2>
 
-          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
             <div className="relative aspect-video overflow-hidden rounded-2xl border-2 border-indigo/10 shadow-sm md:aspect-square">
               <iframe
                 title={`${studio.name} map`}

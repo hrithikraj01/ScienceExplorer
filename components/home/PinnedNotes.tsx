@@ -57,7 +57,7 @@ export function PinnedNotes() {
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden grain bg-[#FDFBF9] py-8 md:py-12"
+      className="relative overflow-hidden grain bg-[#FDFBF9] py-6 md:py-10"
     >
       <div className="shell">
         <Reveal>
@@ -68,7 +68,7 @@ export function PinnedNotes() {
               <DoodleStar className="h-8 w-8 shrink-0 drop-shadow-md sm:h-9 sm:w-9" />
             </h2>
 
-            <ul className="mt-7 grid gap-5">
+            <ul className="mt-5 grid gap-4">
               {quotes.map((item, index) => (
                 <li
                   key={item.id}

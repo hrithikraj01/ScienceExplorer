@@ -129,7 +129,7 @@ body.studio-cursor .tactile-press {
 
 @media (min-width: 768px) {
   .section {
-    padding-block: 3rem;
+    padding-block: 2.75rem;
   }
 }
 
@@ -147,6 +147,14 @@ body.studio-cursor .tactile-press {
 
 .font-quote {
   font-family: var(--font-lora), var(--font-fraunces), Georgia, serif;
+}
+
+.site-logo {
+  display: block;
+  width: auto;
+  max-height: 56px;
+  height: auto;
+  object-fit: contain;
 }
 
 /* —— Craft paper grain —— */
@@ -327,7 +335,7 @@ body.studio-cursor .tactile-press {
 .section-bridge {
   pointer-events: none;
   display: block;
-  height: 1.75rem;
+  height: 1.5rem;
   border-top: 1px solid #eae5dd;
   border-bottom: 1px solid #eae5dd;
   background: linear-gradient(

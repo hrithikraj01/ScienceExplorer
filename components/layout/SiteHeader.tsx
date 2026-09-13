@@ -78,10 +78,8 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300",
-        pastHero
-          ? "border-[#E5E0D8] bg-[#F9F6F0]/90 shadow-[0_4px_18px_rgba(28,25,23,0.08)] backdrop-blur-md"
-          : "border-[#E5E0D8]/70 bg-[#F9F6F0]/95 shadow-[0_2px_8px_rgba(0,0,0,0.04)] backdrop-blur-sm",
+        "sticky top-0 z-50 border-b border-[#EAE5DD] bg-[#FDFBF9]/90 shadow-sm backdrop-blur-md transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300",
+        pastHero && "shadow-[0_4px_18px_rgba(28,25,23,0.08)]",
       )}
     >
       <div className="shell flex items-center justify-between gap-4 py-2.5 md:py-3">
@@ -92,13 +90,13 @@ export function SiteHeader() {
         >
           <Image
             src="/media/logo.png"
-            alt=""
-            width={96}
-            height={96}
+            alt="Science Explorers Logo"
+            width={48}
+            height={48}
             priority
-            className="h-10 w-10 rounded-full object-cover ring-2 ring-indigo/15 sm:h-11 sm:w-11 md:h-12 md:w-12"
+            className="h-12 w-12 rounded-full object-cover ring-1 ring-[#EAE5DD]"
           />
-          <span className="font-brand text-base font-bold tracking-tight text-[#1E3A8A] sm:text-lg [text-shadow:0_1px_0_rgba(30,58,138,0.22),0_2px_10px_rgba(37,99,235,0.22)]">
+          <span className="font-brand text-base font-bold tracking-tight text-slate-800 sm:text-lg">
             {site.name}
           </span>
         </Link>
@@ -112,10 +110,10 @@ export function SiteHeader() {
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "nav-link tactile-press relative rounded-full px-3 py-2 text-xs font-semibold tracking-wide uppercase transition-[color,background-color,transform] duration-200 lg:px-3.5",
+                    "nav-link tactile-press relative rounded-full px-3 py-1.5 text-xs font-semibold tracking-wider uppercase text-slate-800 transition-colors duration-200 lg:px-3.5",
                     active
-                      ? "bg-sky-100 text-indigo"
-                      : "text-indigo [@media(hover:hover)]:hover:bg-pink-100 [@media(hover:hover)]:hover:text-pink-deep",
+                      ? "bg-pink-100/80 text-pink-600"
+                      : "hover:bg-pink-100/60 hover:text-pink-600",
                   )}
                 >
                   {item.label}
@@ -188,10 +186,10 @@ export function SiteHeader() {
           <div className="flex items-center justify-between border-b border-line px-5 py-4">
             <Image
               src="/media/logo.png"
-              alt={site.name}
-              width={120}
-              height={36}
-              className="h-9 w-auto object-contain"
+              alt="Science Explorers Logo"
+              width={48}
+              height={48}
+              className="h-12 w-12 rounded-full object-cover"
             />
             <button
               type="button"
@@ -212,10 +210,10 @@ export function SiteHeader() {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "rounded-full px-3 py-3 text-sm font-semibold tracking-wide uppercase",
+                  "rounded-full px-3 py-3 text-sm font-semibold tracking-wider uppercase text-slate-800 transition-colors",
                   isHashActive(pathname, item.href, hash)
-                    ? "bg-sky-100 font-semibold text-indigo"
-                    : "text-ink [@media(hover:hover)]:hover:bg-pink-100",
+                    ? "bg-pink-100/80 text-pink-600"
+                    : "hover:bg-pink-100/60 hover:text-pink-600",
                 )}
               >
                 {item.label}

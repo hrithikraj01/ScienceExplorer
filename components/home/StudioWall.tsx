@@ -127,7 +127,7 @@ export function StudioWall() {
   return (
     <section
       id="community"
-      className="relative overflow-hidden grain bg-[#FDFBF9] py-8 md:py-12"
+      className="relative overflow-hidden grain bg-[#FDFBF9] py-6 md:py-10"
     >
       <div className="shell">
         <Reveal className="relative mx-auto max-w-2xl text-center">
@@ -148,8 +148,8 @@ export function StudioWall() {
         </Reveal>
 
         <Reveal>
-          <div className="studio-pinboard relative mt-6 p-5 pb-12 sm:p-7 sm:pb-12 md:p-8 md:pb-12">
-            <ul className="studio-pinboard__grid relative mt-2 sm:mt-4">
+          <div className="studio-pinboard relative mt-4 p-4 pb-10 sm:mt-5 sm:p-6 sm:pb-10 md:p-7 md:pb-10">
+            <ul className="studio-pinboard__grid relative mt-1 sm:mt-2">
               {studioWallPhotos.map((photo) => (
                 <li key={photo.id} className={cn("relative", photo.overlap)}>
                   <button

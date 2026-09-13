@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { bookNow, nav, site } from "@/lib/site";
 
@@ -7,11 +8,26 @@ export function SiteFooter() {
   return (
     <footer
       data-cursor-surface="dark"
-      className="mt-auto border-t-2 border-indigo/20 bg-ink text-white"
+      className="mt-auto border-t-2 border-pink/25 bg-ink text-white"
     >
       <div className="shell grid gap-8 py-8 sm:grid-cols-2 md:py-10 lg:grid-cols-3">
         <div>
-          <p className="font-display text-lg font-semibold">{site.name}</p>
+          <Link
+            href="/#hero"
+            className="inline-flex items-center gap-3"
+            aria-label={`${site.name} home`}
+          >
+            <Image
+              src="/media/logo.png"
+              alt="Science Explorers Logo"
+              width={48}
+              height={48}
+              className="h-12 w-12 rounded-full object-cover"
+            />
+            <span className="font-display text-lg font-semibold">
+              {site.name}
+            </span>
+          </Link>
           <p className="mt-2 font-hand text-xl text-pink/90">
             Make · Discover · Belong
           </p>

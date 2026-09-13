@@ -39,8 +39,8 @@ export function Hero() {
         <DoodleStar className="h-8 w-8" />
       </div>
 
-      <div className="shell pt-2 pb-8 sm:pt-3 sm:pb-10">
-        <div className="grid items-center gap-8 md:grid-cols-12 md:gap-10 lg:gap-14">
+      <div className="shell pt-2 pb-6 sm:pt-3 sm:pb-8">
+        <div className="grid items-center gap-6 md:grid-cols-12 md:gap-8 lg:gap-12">
           {/* Left — copy + CTAs */}
           <Reveal className="md:col-span-7">
             <p className="tape-tag">Singapore · hands-on studio</p>
@@ -86,7 +86,7 @@ export function Hero() {
               you can hold, show, and take home.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3">
               <Button href="/experiences">Explore workshops &amp; book</Button>
               <Button href="/about" variant="secondary">
                 Meet Auntie Jonn
