@@ -114,7 +114,7 @@ const INTERACTIVE_SELECTOR = [
   ".polaroid",
   ".creation-card",
   ".module-card",
-  ".trail-banner__card",
+  ".trail-step",
   ".tactile-press",
 ].join(", ");
 

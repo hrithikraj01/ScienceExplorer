@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import {
   DoodleAtom,
@@ -74,43 +75,35 @@ const creations = [
 
 const processSteps = [
   {
-    n: "01",
     label: "Idea",
-    place: "Cairn of Insight",
     line: "A spark of curiosity that starts the trail.",
   },
   {
-    n: "02",
     label: "Experiment",
-    place: "Chemistry Station",
     line: "Hands-on testing — mix, try, and see.",
   },
   {
-    n: "03",
     label: "Make",
-    place: "Chamber of Creation",
     line: "Build something real you can take home.",
   },
   {
-    n: "04",
     label: "Belong",
-    place: "Haven of Belonging",
     line: "Share what you made — and come back.",
   },
 ] as const;
 
-function IdeaSpark({ className }: { className?: string }) {
-  return <DoodleAtom className={className} />;
-}
-
-function ExperimentMix({ className }: { className?: string }) {
-  return <DoodleBeaker className={className} />;
-}
-
-function MakeGear({ className }: { className?: string }) {
+/** Make — original 2D sunburst / sparkle doodle */
+function MakeSparkle({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 64" fill="none" aria-hidden className={className}>
-      <circle cx="32" cy="32" r="10" fill="#dbeafe" stroke="#2563eb" strokeWidth="2" />
+      <circle
+        cx="32"
+        cy="32"
+        r="10"
+        fill="#dbeafe"
+        stroke="#2563eb"
+        strokeWidth="2"
+      />
       <circle cx="32" cy="32" r="4" fill="#2563eb" />
       <path
         d="M32 12v6M32 46v6M12 32h6M46 32h6M18 18l4 4M42 42l4 4M46 18l-4 4M22 42l-4 4"
@@ -128,6 +121,7 @@ function MakeGear({ className }: { className?: string }) {
   );
 }
 
+/** Belong — original 2D dotted ring + pink heart */
 function BelongHeart({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 64 64" fill="none" aria-hidden className={className}>
@@ -151,21 +145,24 @@ function BelongHeart({ className }: { className?: string }) {
   );
 }
 
-const stepIcons = [IdeaSpark, ExperimentMix, MakeGear, BelongHeart] as const;
+const stepIcons = [DoodleAtom, DoodleBeaker, MakeSparkle, BelongHeart] as const;
 
 export function CorePromise() {
+  const reduceMotion = useReducedMotion();
   const [active, setActive] = useState(0);
   const [hovered, setHovered] = useState<number | null>(null);
   const [paused, setPaused] = useState(false);
   const focused = hovered ?? active;
+  const progress =
+    processSteps.length <= 1 ? 0 : focused / (processSteps.length - 1);
 
   useEffect(() => {
-    if (paused || hovered !== null) return;
+    if (reduceMotion || paused || hovered !== null) return;
     const id = window.setInterval(() => {
       setActive((prev) => (prev + 1) % processSteps.length);
     }, 3200);
     return () => window.clearInterval(id);
-  }, [paused, hovered]);
+  }, [paused, hovered, reduceMotion]);
 
   return (
     <section
@@ -173,111 +170,98 @@ export function CorePromise() {
       className="explorers-trail relative overflow-x-clip bg-[#FDFBF9] pb-6 md:pb-10"
     >
       <Reveal className="w-full">
-        <div className="explorers-trail-banner relative left-1/2 w-screen max-w-none -translate-x-1/2 border-y border-[#EAE5DD]">
-          <div className="trail-banner__grid" aria-hidden />
+        <div className="shell pt-6 sm:pt-8">
+          <SectionPill tone="trail">Explorer&apos;s Trail</SectionPill>
+          <h2 className="sr-only">Idea, Experiment, Make, Belong</h2>
 
-          <div className="trail-banner__inner relative z-[1] mx-auto flex max-w-6xl flex-col justify-center px-4 py-5 sm:px-8 sm:py-6 md:px-10">
-            <header className="trail-banner__header flex flex-wrap items-end justify-between gap-2">
-              <div>
-                <SectionPill tone="trail">Explorer&apos;s Trail</SectionPill>
-                <h2 className="sr-only">Idea, Experiment, Make, Belong</h2>
-                <p className="trail-banner__lede">
-                  Where curious sparks become real creations — walk our
-                  hands-on science trail.
-                </p>
-              </div>
-              <p className="trail-banner__hint hidden sm:block" aria-hidden>
-                Idea → Experiment → Make → Belong
-              </p>
-            </header>
+          <div
+            className="relative mt-8 sm:mt-10"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => {
+              setPaused(false);
+              setHovered(null);
+            }}
+          >
+            {/* Thin connecting rail */}
+            <div className="trail-track" aria-hidden>
+              <span className="trail-track__base" />
+              <motion.span
+                className="trail-track__fill"
+                initial={false}
+                animate={{ scaleX: progress }}
+                transition={
+                  reduceMotion
+                    ? { duration: 0 }
+                    : { type: "spring", stiffness: 140, damping: 24 }
+                }
+                style={{ transformOrigin: "left center" }}
+              />
+            </div>
 
-            <div
-              className="trail-banner__pipeline"
-              onMouseEnter={() => setPaused(true)}
-              onMouseLeave={() => {
-                setPaused(false);
-                setHovered(null);
-              }}
-            >
-              {/* Fluid connecting track */}
-              <div className="trail-banner__track" aria-hidden>
-                <span
-                  className="trail-banner__track-fill"
-                  style={{
-                    width: `${(focused / (processSteps.length - 1)) * 100}%`,
-                  }}
-                />
-                <span
-                  className="trail-banner__pulse"
-                  style={{
-                    left: `calc(${(focused / (processSteps.length - 1)) * 100}% - 6px)`,
-                  }}
-                />
-              </div>
+            <ol className="relative z-[1] grid grid-cols-1 gap-8 md:grid-cols-4 md:gap-4">
+              {processSteps.map((step, index) => {
+                const Icon = stepIcons[index];
+                const isActive = index === focused;
+                const isLive = hovered === index;
 
-              <ol className="trail-banner__steps">
-                {processSteps.map((step, index) => {
-                  const Icon = stepIcons[index];
-                  const isActive = index === focused;
-
-                  return (
-                    <li
-                      key={step.label}
+                return (
+                  <li key={step.label} className="flex justify-center md:block">
+                    <button
+                      type="button"
+                      aria-pressed={isActive}
+                      aria-label={`${step.label}: ${step.line}`}
+                      onClick={() => {
+                        setActive(index);
+                        setPaused(true);
+                      }}
+                      onMouseEnter={() => setHovered(index)}
+                      onFocus={() => {
+                        setHovered(index);
+                        setPaused(true);
+                      }}
+                      onBlur={() => setHovered(null)}
                       className={cn(
-                        "trail-banner__col",
+                        "trail-step group mx-auto flex w-full max-w-[14rem] flex-col items-center text-center md:max-w-none",
                         isActive && "is-active",
+                        isLive && "is-live",
                       )}
-                      style={{ flexGrow: isActive ? 1.45 : 1 }}
                     >
-                      <button
-                        type="button"
-                        aria-pressed={isActive}
-                        aria-label={`${step.n} ${step.label}: ${step.place}`}
-                        onClick={() => {
-                          setActive(index);
-                          setPaused(true);
-                        }}
-                        onMouseEnter={() => setHovered(index)}
-                        onFocus={() => {
-                          setHovered(index);
-                          setPaused(true);
-                        }}
-                        onBlur={() => setHovered(null)}
+                      <span className="relative flex h-20 w-20 items-center justify-center">
+                        <span
+                          className={cn(
+                            "trail-step__orb flex h-20 w-20 items-center justify-center rounded-full transition-all duration-300",
+                            isActive || isLive
+                              ? "border border-pink-400 bg-pink-50/20 shadow-sm ring-4 ring-pink-100"
+                              : "border border-slate-200/80 bg-white shadow-sm",
+                          )}
+                        >
+                          <Icon
+                            className={cn(
+                              "h-9 w-9 transition-transform duration-300 sm:h-10 sm:w-10",
+                              (isActive || isLive) && "scale-110",
+                            )}
+                          />
+                        </span>
+                      </span>
+
+                      <p
                         className={cn(
-                          "trail-banner__card",
-                          isActive && "is-active",
+                          "mt-3 font-display text-xl tracking-tight transition-colors duration-300",
+                          isActive || isLive
+                            ? "font-bold text-blue-600"
+                            : "font-semibold text-slate-900",
                         )}
                       >
-                        <div className="trail-banner__card-top">
-                          <span className="trail-banner__num">{step.n}</span>
-                          <span className="trail-banner__node" aria-hidden />
-                        </div>
-
-                        <p className="trail-banner__label">{step.label}</p>
-                        <p className="trail-banner__place">{step.place}</p>
-                        <p className="trail-banner__line">{step.line}</p>
-
-                        <div
-                          className={cn(
-                            "trail-banner__art",
-                            isActive && "is-open",
-                          )}
-                          aria-hidden
-                        >
-                          <Icon className="h-9 w-9 sm:h-10 sm:w-10" />
-                        </div>
-
-                        {index === 2 ? (
-                          <span className="trail-banner__tag">
-                            You take this home!
-                          </span>
-                        ) : null}
-                      </button>
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
+                        {step.label}
+                      </p>
+                      <p className="mt-1.5 max-w-[200px] text-sm leading-relaxed text-slate-600">
+                        {step.line}
+                      </p>
+                    </button>
+                  </li>
+                );
+              })}
+            </ol>
           </div>
         </div>
       </Reveal>
@@ -285,9 +269,9 @@ export function CorePromise() {
       <div className="shell mt-6 sm:mt-8">
         <Reveal>
           <div className="mb-5 text-center sm:mb-6">
-            <p className="mx-auto w-fit">
-              <SectionPill tone="make">What you make &amp; take home</SectionPill>
-            </p>
+            <SectionPill tone="make" className="mx-auto w-fit">
+              What you make &amp; take home
+            </SectionPill>
             <p className="mx-auto mt-2 max-w-lg text-ink-soft">
               Real things from Auntie Jonn&apos;s workshops — soap, prints,
               magnets, and more you can hold.

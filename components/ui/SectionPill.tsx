@@ -21,6 +21,8 @@ export function SectionPill({
   className?: string;
 }) {
   return (
-    <p className={cn("section-pill", tones[tone], className)}>{children}</p>
+    <span className={cn("section-pill", tones[tone], className)}>
+      {children}
+    </span>
   );
 }
