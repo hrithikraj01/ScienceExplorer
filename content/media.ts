@@ -18,11 +18,13 @@
  * ============================================================================
  */
 
+import { withBasePath } from "@/lib/basePath";
+
 const mediaBase = process.env.NEXT_PUBLIC_MEDIA_BASE ?? "";
 
 function mediaUrl(pathOrAbsolute: string) {
   if (/^https?:\/\//.test(pathOrAbsolute)) return pathOrAbsolute;
-  if (!mediaBase) return pathOrAbsolute;
+  if (!mediaBase) return withBasePath(pathOrAbsolute);
   return `${mediaBase.replace(/\/$/, "")}/${pathOrAbsolute.replace(/^\//, "")}`;
 }
 

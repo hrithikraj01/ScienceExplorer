@@ -30,7 +30,7 @@ export default function CommunityPage() {
               Come for something you&apos;re curious about. Stay for the people you
               meet.
             </p>
-            <p className="mt-4 text-sm text-ink-soft">{copy(founder.story[2])}</p>
+            <p className="mt-4 text-sm text-ink-soft">{copy(founder.story[0])}</p>
           </div>
           <ObjectBench caption="A place people return to · photograph to come" />
         </div>

@@ -1,21 +1,17 @@
 import type { Metadata } from "next";
-import { CatalogueFilters } from "@/components/experiences/CatalogueFilters";
-import { SessionList } from "@/components/experiences/SessionList";
+import { Suspense } from "react";
+import {
+  CalendarResults,
+  FilteredCalendarResults,
+} from "@/components/experiences/CalendarResults";
 import { Button } from "@/components/ui/Button";
-import { getUpcoming, parseExperienceFilters } from "@/lib/experiences";
 
 export const metadata: Metadata = {
   title: "Calendar",
   description: "Upcoming Science Explorers sessions in Singapore. Dates are placeholders.",
 };
 
-export default async function CalendarPage({
-  searchParams,
-}: PageProps<"/calendar">) {
-  const params = await searchParams;
-  const filters = parseExperienceFilters(params);
-  const rows = getUpcoming(filters);
-
+export default function CalendarPage() {
   return (
     <main id="main" className="flex-1 pb-20">
       <div className="border-b border-ink/10 px-4 py-7 lg:px-8">
@@ -27,10 +23,9 @@ export default async function CalendarPage({
         </div>
       </div>
       <div className="mx-auto w-full max-w-6xl px-4 py-8 lg:px-8">
-        <CatalogueFilters base="/calendar" current={filters} />
-        <div className="mt-8">
-          <SessionList rows={rows} />
-        </div>
+        <Suspense fallback={<CalendarResults filters={{}} />}>
+          <FilteredCalendarResults />
+        </Suspense>
         <div className="mt-8">
           <Button href="/experiences">See all experiences</Button>
         </div>

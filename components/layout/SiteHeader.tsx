@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { withBasePath } from "@/lib/basePath";
 import { usePathname } from "next/navigation";
 import { useBooking } from "@/components/booking/BookingProvider";
 import { bookNow, nav, site } from "@/lib/site";
@@ -89,7 +90,7 @@ export function SiteHeader() {
           aria-label={`${site.name} home`}
         >
           <Image
-            src="/media/logo.png"
+            src={withBasePath("/media/logo.png")}
             alt="Science Explorers Logo"
             width={48}
             height={48}
@@ -185,7 +186,7 @@ export function SiteHeader() {
         >
           <div className="flex items-center justify-between border-b border-line px-5 py-4">
             <Image
-              src="/media/logo.png"
+              src={withBasePath("/media/logo.png")}
               alt="Science Explorers Logo"
               width={48}
               height={48}

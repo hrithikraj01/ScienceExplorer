@@ -1,3 +1,5 @@
+import { withBasePath } from "@/lib/basePath";
+
 export const site = {
   name: "Science Explorers",
   place: "Singapore",
@@ -37,8 +39,9 @@ export const site = {
       process.env.NEXT_PUBLIC_PAYNOW_NAME ?? "Science Explorers",
     proxyLabel:
       process.env.NEXT_PUBLIC_PAYNOW_PROXY ?? "UEN 53389785L",
-    qrUrl:
+    qrUrl: withBasePath(
       process.env.NEXT_PUBLIC_PAYNOW_QR_URL ?? "/media/paynow-qr.png",
+    ),
   },
   /**
    * CONTENT HOOK — LEGAL_ENTITY

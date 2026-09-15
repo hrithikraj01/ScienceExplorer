@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { withBasePath } from "@/lib/basePath";
 import { bookNow, nav, site } from "@/lib/site";
 
 export function SiteFooter() {
@@ -18,7 +19,7 @@ export function SiteFooter() {
             aria-label={`${site.name} home`}
           >
             <Image
-              src="/media/logo.png"
+              src={withBasePath("/media/logo.png")}
               alt="Science Explorers Logo"
               width={48}
               height={48}
